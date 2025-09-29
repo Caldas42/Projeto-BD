@@ -82,7 +82,7 @@ function PessoaComponent() {
 
   return (
     <div className="component-container">
-      <h2>Gerenciamento dos dados</h2>
+      <h2>Gerenciamento das Pessoas</h2>
       
       {error && <p className="error-message">{error}</p>}
 
