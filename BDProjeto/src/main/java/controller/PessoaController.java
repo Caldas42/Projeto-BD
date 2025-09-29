@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-@CrossOrigin // Mantém o CrossOrigin para permitir requisições do front-end
+@CrossOrigin 
 @RequestMapping("/api/pessoas")
 public class PessoaController {
 
@@ -24,7 +24,6 @@ public class PessoaController {
         pessoaDAO.inserir(pessoa);
     }
 
-    // Nenhuma mudança aqui, este método estava correto.
     @PutMapping("/{cod}")
     public void atualizarPessoa(@PathVariable int cod, @RequestBody Pessoa pessoa) throws SQLException {
         pessoa.setCod(cod);

@@ -15,7 +15,6 @@
     </parent>
 
     <dependencies>
-        <!-- Web (para REST APIs) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -28,14 +27,12 @@
 		</dependency>
 
 
-        <!-- Banco de dados H2 (teste) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- MySQL driver -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>

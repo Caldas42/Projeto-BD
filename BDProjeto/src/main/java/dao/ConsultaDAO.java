@@ -29,7 +29,6 @@ public class ConsultaDAO {
         return resultados;
     }
     
-    // Consulta 1: Pessoas que jogam 'PVZ' ou 'Clash Royale'
     public List<Map<String, Object>> getJogadoresPvzOuClash() throws SQLException {
         String sql = "SELECT DISTINCT p.Cod FROM Pessoa p " +
                      "JOIN Defesas_de_Torres_Jogados d ON p.Cod = d.Cod_Pessoa " +
@@ -37,7 +36,6 @@ public class ConsultaDAO {
         return executarConsulta(sql);
     }
     
-    // Consulta 2: Contagem de jogos por pessoa
     public List<Map<String, Object>> getContagemJogosPorPessoa() throws SQLException {
         String sql = "SELECT p.Cod, COUNT(d.Jogo) AS Quantidade_Jogos " +
                      "FROM Pessoa p LEFT JOIN Defesas_de_Torres_Jogados d ON p.Cod = d.Cod_Pessoa " +
@@ -45,7 +43,6 @@ public class ConsultaDAO {
         return executarConsulta(sql);
     }
 
-    // Consulta 3: Listar todos os jogos de cada pessoa
     public List<Map<String, Object>> getJogosDeCadaPessoa() throws SQLException {
         String sql = "SELECT p.Cod, d.Jogo FROM Pessoa p " +
                      "LEFT JOIN Defesas_de_Torres_Jogados d ON p.Cod = d.Cod_Pessoa " +
@@ -53,7 +50,6 @@ public class ConsultaDAO {
         return executarConsulta(sql);
     }
 
-    // Consulta 4: Próxima fase liberada a partir de uma fase
     public List<Map<String, Object>> getProximaFase() throws SQLException {
         String sql = "SELECT f1.Numero_da_Fase AS Fase, f2.Numero_da_Fase AS Proxima_Fase " +
                      "FROM Fase f1 LEFT JOIN Fase f2 " +

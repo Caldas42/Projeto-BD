@@ -10,10 +10,6 @@ import java.util.List;
 public class PessoaDAO {
 
     public void inserir(Pessoa p) throws SQLException {
-        // CORREÇÃO PARA O ERRO 'Field Sexo':
-        // Especificamos que estamos inserindo APENAS na coluna "Idade".
-        // Isso ignora a coluna "Sexo" e deixa o banco de dados usar o valor padrão (se houver) ou funcionar se ela permitir nulos.
-        // Se a coluna "Sexo" for obrigatória (NOT NULL), você precisará ajustar o banco ou enviar o dado do front-end.
         String sql = "INSERT INTO Pessoa (Idade) VALUES (?)";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -51,15 +47,12 @@ public class PessoaDAO {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
-            // CORREÇÃO PARA O ERRO DE DELEÇÃO:
-            // Usamos os nomes exatos da tabela e da coluna que apareceram no seu log de erro.
             String sqlJogos = "DELETE FROM jogador_joga WHERE Pessoa_Cod=?";
             try (PreparedStatement psJogos = conn.prepareStatement(sqlJogos)) {
                 psJogos.setInt(1, cod);
                 psJogos.executeUpdate();
             }
 
-            // Agora, deletamos a pessoa da tabela principal.
             String sqlPessoa = "DELETE FROM Pessoa WHERE Cod=?";
             try (PreparedStatement psPessoa = conn.prepareStatement(sqlPessoa)) {
                 psPessoa.setInt(1, cod);
