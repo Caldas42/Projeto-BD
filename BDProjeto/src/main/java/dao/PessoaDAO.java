@@ -10,6 +10,8 @@ import java.util.List;
 public class PessoaDAO {
 
     public void inserir(Pessoa p) throws SQLException {
+        // CORREÇÃO: Inserindo apenas a Idade.
+        // Isto resolve o erro "Field 'Sexo' doesn't have a default value".
         String sql = "INSERT INTO Pessoa (Idade) VALUES (?)";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -45,27 +47,30 @@ public class PessoaDAO {
         Connection conn = null;
         try {
             conn = ConnectionFactory.getConnection();
-            conn.setAutoCommit(false);
+            conn.setAutoCommit(false); // Inicia uma transação
 
-            String sqlJogos = "DELETE FROM jogador_joga WHERE Pessoa_Cod=?";
+            // CORREÇÃO: Usando os nomes da tabela e coluna do seu log de erro.
+            // Primeiro, deleta os registros dependentes.
+            String sqlJogos = "DELETE FROM jogador_joga WHERE Pessoa_Cod = ?";
             try (PreparedStatement psJogos = conn.prepareStatement(sqlJogos)) {
                 psJogos.setInt(1, cod);
                 psJogos.executeUpdate();
             }
 
-            String sqlPessoa = "DELETE FROM Pessoa WHERE Cod=?";
+            // Depois, deleta o registro principal.
+            String sqlPessoa = "DELETE FROM Pessoa WHERE Cod = ?";
             try (PreparedStatement psPessoa = conn.prepareStatement(sqlPessoa)) {
                 psPessoa.setInt(1, cod);
                 psPessoa.executeUpdate();
             }
 
-            conn.commit();
+            conn.commit(); // Confirma a transação se tudo deu certo
 
         } catch (SQLException e) {
             if (conn != null) {
-                conn.rollback();
+                conn.rollback(); // Desfaz a transação em caso de erro
             }
-            throw e;
+            throw e; 
         } finally {
             if (conn != null) {
                 conn.setAutoCommit(true);
@@ -74,3 +79,4 @@ public class PessoaDAO {
         }
     }
 }
+
