@@ -9,7 +9,6 @@ import java.util.List;
 
 public class FaseDAO {
     public void inserir(Fase f) throws SQLException {
- 
         String sql = "INSERT INTO Fase (Numero_da_fase, Vidas_iniciais, Rodadas, Moedas_iniciais, Numero_da_Fase_Liberada) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -42,7 +41,6 @@ public class FaseDAO {
     }
 
     public void atualizar(Fase f) throws SQLException {
-       
         String sql = "UPDATE Fase SET Vidas_iniciais=?, Rodadas=?, Moedas_iniciais=?, Numero_da_Fase_Liberada=? WHERE Numero_da_fase=?";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -56,7 +54,6 @@ public class FaseDAO {
     }
 
     public void excluir(int id) throws SQLException {
-        
         String sql = "DELETE FROM Fase WHERE Numero_da_fase=?";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -65,3 +62,4 @@ public class FaseDAO {
         }
     }
 }
+

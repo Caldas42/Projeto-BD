@@ -2,6 +2,7 @@ import React from 'react';
 import PessoaComponent from './PessoaComponent';
 import FaseComponent from './FaseComponent';
 import ConsultasComponent from './ConsultasComponent';
+import Graficos from './graficos';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <PessoaComponent />
         <FaseComponent />
         <ConsultasComponent />
+        <Graficos/>
       </main>
     </div>
   );
