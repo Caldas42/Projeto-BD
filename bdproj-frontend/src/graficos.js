@@ -1,23 +1,24 @@
 import React from "react";
+import "./App.css"; 
+
+const importAll = (r) => r.keys().map(r);
+const graficos = importAll(require.context("./assets", false, /\.png$/));
 
 const Graficos = () => {
-  const graficos = Array.from({ length: 15 }, (_, i) =>
-    require(`./assets/grafico${i + 1}.png`)
-  );
-
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
       <h1 className="text-2xl font-bold mb-6">Meus Gráficos</h1>
-      <div className="grid grid-cols-3 gap-6">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {graficos.map((grafico, index) => (
           <div
             key={index}
-            className="bg-white p-4 rounded-2xl shadow-md flex items-center justify-center"
+            className="bg-white p-4 rounded-xl shadow-md flex items-center justify-center"
           >
-            <img
-              src={grafico}
-              alt={`Gráfico ${index + 1}`}
-              className="w-48 h-48 object-contain"
+            <img 
+              src={grafico} 
+              alt={`Gráfico ${index + 1}`} 
+              className="grafico-fixo" 
             />
           </div>
         ))}
