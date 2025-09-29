@@ -1,0 +1,98 @@
+body {
+  background-color: #282c34;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 20px;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  margin-bottom: 40px;
+}
+
+.component-container {
+  background-color: #3c414d;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+input[type="number"] {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background-color: #282c34;
+  color: white;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  background-color: #61dafb;
+  color: #282c34;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #52b8d8;
+}
+
+.cancel-button, .delete-button {
+  background-color: #ff6b6b;
+}
+
+.cancel-button:hover, .delete-button:hover {
+  background-color: #e05252;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.data-table th, .data-table td {
+  border: 1px solid #4a505c;
+  padding: 12px;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: #282c34;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+
+.error-message {
+  color: #ff6b6b;
+  background-color: #4d3c3c;
+  border: 1px solid #ff6b6b;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
