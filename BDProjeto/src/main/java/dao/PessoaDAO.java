@@ -49,16 +49,33 @@ public class PessoaDAO {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
-            String sqlJogos = "DELETE FROM jogador_joga WHERE Pessoa_Cod = ?";
-            try (PreparedStatement psJogos = conn.prepareStatement(sqlJogos)) {
-                psJogos.setInt(1, cod);
-                psJogos.executeUpdate();
+            String sqlUtiliza = "DELETE FROM Utiliza WHERE Pessoa_Cod = ?";
+            try (PreparedStatement ps = conn.prepareStatement(sqlUtiliza)) {
+                ps.setInt(1, cod);
+                ps.executeUpdate();
             }
+
+            String sqlJogos = "DELETE FROM Jogador_Joga WHERE Pessoa_Cod = ?";
+            try (PreparedStatement ps = conn.prepareStatement(sqlJogos)) {
+                ps.setInt(1, cod);
+                ps.executeUpdate();
+            }
+
+            String sqlDefesas = "DELETE FROM Defesas_de_Torres_Jogados WHERE Cod_Pessoa = ?";
+            try (PreparedStatement ps = conn.prepareStatement(sqlDefesas)) {
+                ps.setInt(1, cod);
+                ps.executeUpdate();
+            }
+
             String sqlPessoa = "DELETE FROM Pessoa WHERE Cod = ?";
-            try (PreparedStatement psPessoa = conn.prepareStatement(sqlPessoa)) {
-                psPessoa.setInt(1, cod);
-                psPessoa.executeUpdate();
+            try (PreparedStatement ps = conn.prepareStatement(sqlPessoa)) {
+                ps.setInt(1, cod);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected == 0) {
+                    throw new SQLException("Falha ao deletar a pessoa, registro não encontrado.");
+                }
             }
+            
             conn.commit();
 
         } catch (SQLException e) {
@@ -74,4 +91,3 @@ public class PessoaDAO {
         }
     }
 }
-

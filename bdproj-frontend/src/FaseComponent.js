@@ -40,7 +40,6 @@ function FaseComponent() {
     const method = editId ? 'PUT' : 'POST';
     const url = editId ? `${API_URL}/${editId}` : API_URL;
     
-    // Converte os valores para inteiros
     const faseData = Object.entries(formData).reduce((acc, [key, value]) => {
         acc[key] = value ? parseInt(value, 10) : 0;
         return acc;
