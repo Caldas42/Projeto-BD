@@ -9,14 +9,11 @@ import java.util.List;
 
 public class FaseDAO {
     public void inserir(Fase f) throws SQLException {
-        String sql = "INSERT INTO Fase (Numero_da_fase, Vidas_iniciais, Rodadas, Moedas_iniciais, Numero_da_Fase_Liberada) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Fase (Numero_da_fase, Numero_da_Fase_Liberada) VALUES (?, ?)";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, f.getNumero_da_fase());
-            ps.setInt(2, f.getVidas_iniciais());
-            ps.setInt(3, f.getRodadas());
-            ps.setInt(4, f.getMoedas_iniciais());
-            ps.setInt(5, f.getNumero_da_Fase_Liberada());
+            ps.setInt(2, f.getNumero_da_Fase_Liberada());
             ps.executeUpdate();
         }
     }
@@ -41,14 +38,14 @@ public class FaseDAO {
     }
 
     public void atualizar(Fase f) throws SQLException {
-        String sql = "UPDATE Fase SET Vidas_iniciais=?, Rodadas=?, Moedas_iniciais=?, Numero_da_Fase_Liberada=? WHERE Numero_da_fase=?";
+        String sql = "UPDATE Fase SET Numero_da_Fase=?";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, f.getVidas_iniciais());
-            ps.setInt(2, f.getRodadas());
-            ps.setInt(3, f.getMoedas_iniciais());
-            ps.setInt(4, f.getNumero_da_Fase_Liberada());
-            ps.setInt(5, f.getNumero_da_fase()); 
+        	ps.setInt(1,f.getNumero_da_fase());
+            ps.setInt(2,f.getVidas_iniciais());
+            ps.setInt(3,f.getRodadas());
+            ps.setInt(4,f.getMoedas_iniciais());
+            ps.setInt(5,f.getNumero_da_Fase_Liberada());
             ps.executeUpdate();
         }
     }
@@ -62,4 +59,3 @@ public class FaseDAO {
         }
     }
 }
-
