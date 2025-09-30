@@ -40,10 +40,15 @@ function FaseComponent() {
     const method = editId ? 'PUT' : 'POST';
     const url = editId ? `${API_URL}/${editId}` : API_URL;
     
-    const faseData = Object.entries(formData).reduce((acc, [key, value]) => {
-        acc[key] = value ? parseInt(value, 10) : 0;
-        return acc;
-    }, {});
+    const faseData = {
+      numero_da_fase: parseInt(formData.numero_da_fase, 10),
+      vidas_iniciais: parseInt(formData.vidas_iniciais, 10),
+      rodadas: parseInt(formData.rodadas, 10),
+      moedas_iniciais: parseInt(formData.moedas_iniciais, 10),
+      numero_da_Fase_Liberada: formData.numero_da_Fase_Liberada 
+        ? parseInt(formData.numero_da_Fase_Liberada, 10) 
+        : null
+    };
 
     try {
       setError('');
