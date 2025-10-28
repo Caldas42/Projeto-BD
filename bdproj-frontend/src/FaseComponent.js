@@ -96,7 +96,7 @@ function FaseComponent() {
   };
 
   return (
-    <div className="card">
+    <div className="component-container">
       <h2>Gerenciamento de Fases</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
@@ -135,7 +135,7 @@ function FaseComponent() {
               <td>{f.numero_da_Fase_Liberada}</td>
               <td className="actions">
                 <button onClick={() => handleEdit(f)}>Alterar</button>
-                <button onClick={() => handleDelete(f.numero_da_fase)}>Deletar</button>
+                <button className="cancel-button" onClick={() => handleDelete(f.numero_da_fase)}>Deletar</button>
               </td>
             </tr>
           ))}
