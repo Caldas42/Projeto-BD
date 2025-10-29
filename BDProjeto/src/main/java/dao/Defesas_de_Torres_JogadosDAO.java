@@ -35,11 +35,11 @@ public class Defesas_de_Torres_JogadosDAO {
     }
 
     public void atualizar(Defesas_de_Torres_Jogados td) throws SQLException {
-        String sql = "UPDATE Defesas_de_Torres_Jogados SET Jogo=?";
+        String sql = "UPDATE Defesas_de_Torres_Jogados SET Jogo=? WHERE Cod_Pessoa=?";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, td.getJogo());
-            ps.setInt(3, td.getCod_Pessoa());
+            ps.setInt(2, td.getCod_Pessoa());
             ps.executeUpdate();
         }
     }
