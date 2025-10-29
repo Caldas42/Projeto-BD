@@ -2,6 +2,8 @@ import React from 'react';
 import PessoaComponent from './PessoaComponent';
 import FaseComponent from './FaseComponent';
 import ConsultasComponent from './ConsultasComponent';
+import DefesaDeTorresComponent from './DefesaDeTorresComponent';
+import InimigoComponent from './InimigoComponent';
 import Graficos from './graficos';
 import './App.css';
 
@@ -14,6 +16,8 @@ function App() {
       <main>
         <PessoaComponent />
         <FaseComponent />
+        <DefesaDeTorresComponent/>
+        <InimigoComponent/>
         <ConsultasComponent />
         <Graficos/>
       </main>

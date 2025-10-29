@@ -99,7 +99,7 @@ function FaseComponent() {
     <div className="component-container">
       <h2>Gerenciamento de Fases</h2>
       {error && <div className="error-message">{error}</div>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}className="form-container">
         <div className="form-grid">
             <input type="number" name="numero_da_fase" value={formData.numero_da_fase} onChange={handleInputChange} placeholder="Nº da Fase" required disabled={!!editId} />
             <input type="number" name="vidas_iniciais" value={formData.vidas_iniciais} onChange={handleInputChange} placeholder="Vidas Iniciais" required/>
