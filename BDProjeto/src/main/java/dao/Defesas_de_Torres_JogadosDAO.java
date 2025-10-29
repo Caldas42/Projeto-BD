@@ -44,12 +44,13 @@ public class Defesas_de_Torres_JogadosDAO {
         }
     }
 
-    public void excluir(int id) throws SQLException {
-        String sql = "DELETE FROM Defesas_de_Torres_Jogados WHERE Cod_Pessoa=?";
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        }
+    public void excluir(String jogo, int codPessoa) throws SQLException {
+    String sql = "DELETE FROM Defesas_de_Torres_Jogados WHERE Jogo=? AND Cod_Pessoa=?";
+    try (Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, jogo);
+        ps.setInt(2, codPessoa);
+        ps.executeUpdate();
     }
+}
 }

@@ -29,8 +29,9 @@ public class DefesasDeTorresJogadosController {
         dtjDAO.atualizar(dtj);
     }
 
-    @DeleteMapping("/{id}")
-    public void excluir(@PathVariable int id) throws SQLException {
-        dtjDAO.excluir(id);
-    }
+    @DeleteMapping("/{jogo}/{cod_Pessoa}")
+    public void excluir(@PathVariable String jogo, @PathVariable int cod_Pessoa) throws SQLException {
+        dtjDAO.excluir(jogo, cod_Pessoa);
+    }   
+
 }

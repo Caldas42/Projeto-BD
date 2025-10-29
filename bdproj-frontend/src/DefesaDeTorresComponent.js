@@ -31,38 +31,33 @@ function DefesaDeTorresComponent() {
 
   // Enviar formulário (criar ou atualizar)
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!jogo || !cod_Pessoa) return;
+  event.preventDefault();
+  if (!jogo || !cod_Pessoa) return;
 
-    const defesa = {
-      jogo: jogo,
-      cod_Pessoa: parseInt(cod_Pessoa, 10)
-    };
+  const defesa = { jogo, cod_Pessoa: parseInt(cod_Pessoa, 10) };
+  const method = editItem ? 'PUT' : 'POST';
 
-    const url = editItem ? `${API_URL}/${editItem.jogo}/${editItem.cod_Pessoa}` : API_URL;
-    const method = editItem ? 'PUT' : 'POST';
+  try {
+    const response = await fetch(API_URL, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(defesa),
+    });
 
-    try {
-      setError(null);
-      const response = await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(defesa),
-      });
-
-      if (response.ok) {
-        fetchDefesas();
-        resetForm();
-      } else {
-        const errText = await response.text();
-        console.error("Falha do servidor:", errText);
-        throw new Error('Falha ao salvar. Verifique o console do servidor.');
-      }
-    } catch (error) {
-      console.error("Erro ao salvar defesa:", error);
-      setError("Não foi possível salvar os dados.");
+    if (response.ok) {
+      await fetchDefesas();
+      resetForm();
+    } else {
+      const errText = await response.text();
+      console.error("Erro do servidor:", errText);
+      setError("Falha ao salvar.");
     }
-  };
+  } catch (error) {
+    console.error("Erro ao salvar:", error);
+    setError("Erro de conexão com o servidor.");
+  }
+};
+
 
   // Edição
   const handleEdit = (defesa) => {
@@ -73,23 +68,23 @@ function DefesaDeTorresComponent() {
 
   // Exclusão
   const handleDelete = async (jogo, cod_Pessoa) => {
-    try {
-      setError(null);
-      const response = await fetch(`${API_URL}/${jogo}/${cod_Pessoa}`, {
-        method: 'DELETE',
-      });
-      if (response.ok) {
-        fetchDefesas();
-      } else {
-        const errText = await response.text();
-        console.error("Falha do servidor:", errText);
-        throw new Error('Falha ao deletar. Verifique o console do servidor.');
-      }
-    } catch (error) {
-      console.error("Erro ao deletar defesa:", error);
-      setError("Não foi possível deletar o registro.");
+  try {
+    const response = await fetch(`${API_URL}/${encodeURIComponent(jogo)}/${cod_Pessoa}`, {
+      method: 'DELETE',
+    });
+    if (response.ok) {
+      await fetchDefesas();
+    } else {
+      const errText = await response.text();
+      console.error("Erro ao deletar:", errText);
+      setError("Falha ao deletar.");
     }
-  };
+  } catch (error) {
+    console.error("Erro ao deletar:", error);
+    setError("Erro de conexão com o servidor.");
+  }
+};
+
 
   const resetForm = () => {
     setEditItem(null);
@@ -146,12 +141,7 @@ function DefesaDeTorresComponent() {
               <td>{defesa.cod_Pessoa}</td>
               <td className="actions-cell">
                 <button onClick={() => handleEdit(defesa)}>Alterar</button>
-                <button
-                  onClick={() => handleDelete(defesa.jogo, defesa.cod_Pessoa)}
-                  className="delete-button"
-                >
-                  Deletar
-                </button>
+                <button onClick={() => handleDelete(defesa.jogo, defesa.cod_Pessoa)} className="delete-button">Deletar</button>
               </td>
             </tr>
           ))}
