@@ -36,4 +36,14 @@ public class ConsultaController {
     public List<Map<String, Object>> getProximaFase() throws SQLException {
         return consultaDAO.getProximaFase();
     }
+
+    @GetMapping("/inimigos-fase")
+    public List<Map<String, Object>> getInimigoFase() throws SQLException {
+        return consultaDAO.getInimigoFase();
+    }
+
+    @GetMapping("/resumo-financeiro-jogador")
+    public List<Map<String, Object>> getResumoFinanceiroJogador() throws SQLException {
+        return consultaDAO.getResumoFinanceiroJogador();
+    }
 }

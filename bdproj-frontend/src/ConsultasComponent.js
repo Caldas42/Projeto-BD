@@ -45,6 +45,8 @@ function ConsultasComponent() {
         <button onClick={() => executarConsulta('contagem-jogos-pessoa', 'Contagem de Jogos por Pessoa')}>Consulta 2</button>
         <button onClick={() => executarConsulta('jogos-de-cada-pessoa', 'Jogos de Cada Pessoa')}>Consulta 3</button>
         <button onClick={() => executarConsulta('proxima-fase', 'Sequência de Fases')}>Consulta 4</button>
+        <button onClick={() => executarConsulta('inimigos-fase', 'Inimigos na fase')}>View 1</button>
+        <button onClick={() => executarConsulta('resumo-financeiro-jogador', 'Resumo financeiro do jogador')}>View 2</button>
       </div>
 
       {titulo && <h3>{titulo}</h3>}

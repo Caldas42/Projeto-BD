@@ -56,4 +56,14 @@ public class ConsultaDAO {
                      "ON f1.Numero_da_Fase_Liberada = f2.Numero_da_Fase";
         return executarConsulta(sql);
     }
+
+    public List<Map<String, Object>> getInimigoFase() throws SQLException {
+        String sql = "SELECT * FROM vw_fase_inimigos_participacao";
+        return executarConsulta(sql);
+    }
+
+    public List<Map<String, Object>> getResumoFinanceiroJogador() throws SQLException {
+        String sql = "SELECT * FROM vw_resumo_financeiro_jogador";
+        return executarConsulta(sql);
+    }
 }
