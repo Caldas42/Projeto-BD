@@ -53,21 +53,28 @@ function ConsultasComponent() {
       {error && <p className="error-message">{error}</p>}
 
       {resultados.length > 0 && (
-        <table className="data-table">
-          <thead>
-            <tr>
-              {headers.map(header => <th key={header}>{header}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {resultados.map((linha, index) => (
-              <tr key={index}>
-                {headers.map(header => <td key={header}>{linha[header] === null ? 'N/A' : String(linha[header])}</td>)}
-              </tr>
+  <div className="tabela-container">
+    <table className="data-table">
+      <thead>
+        <tr>
+          {headers.map(header => <th key={header}>{header}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {resultados.map((linha, index) => (
+          <tr key={index}>
+            {headers.map(header => (
+              <td key={header}>
+                {linha[header] === null ? 'N/A' : String(linha[header])}
+              </td>
             ))}
-          </tbody>
-        </table>
-      )}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
     </div>
   );
 }
