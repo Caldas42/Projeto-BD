@@ -99,30 +99,32 @@ function DefesaDeTorresComponent() {
       {error && <p className="error-message">{error}</p>}
 
       <form onSubmit={handleSubmit} className="form-container">
-        <input
-          type="text"
-          value={jogo}
-          onChange={(e) => setJogo(e.target.value)}
-          placeholder="Nome do jogo"
-          required
-        />
-        <input
-          type="number"
-          value={cod_Pessoa}
-          onChange={(e) => setCodPessoa(e.target.value)}
-          placeholder="Código da pessoa"
-          required
-        />
-        <button type="submit">{editItem ? 'Atualizar' : 'Adicionar'}</button>
-        {editItem && (
-          <button
-            type="button"
-            onClick={resetForm}
-            className="cancel-button"
-          >
-            Cancelar
-          </button>
-        )}
+        <div className="form-grid">
+          <input
+            type="text"
+            value={jogo}
+            onChange={(e) => setJogo(e.target.value)}
+            placeholder="Nome do jogo"
+            required
+          />
+          <input
+            type="number"
+            value={cod_Pessoa}
+            onChange={(e) => setCodPessoa(e.target.value)}
+            placeholder="Código da pessoa"
+            required
+          />
+          <button type="submit">{editItem ? 'Atualizar' : 'Adicionar'}</button>
+          {editItem && (
+            <button
+              type="button"
+              onClick={resetForm}
+              className="cancel-button"
+            >
+              Cancelar
+            </button>
+          )}
+        </div>
       </form>
 
       <h3>Lista de Defesas de Torres Jogadas</h3>

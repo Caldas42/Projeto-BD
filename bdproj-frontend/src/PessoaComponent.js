@@ -96,27 +96,27 @@ function PessoaComponent() {
   return (
     <div className="component-container">
       <h2>Gerenciamento das Pessoas</h2>
-      
       {error && <p className="error-message">{error}</p>}
-
       <form onSubmit={handleSubmit} className="form-container">
-        <input
-          type="number"
-          value={idade}
-          onChange={(e) => setIdade(e.target.value)}
-          placeholder="Idade da pessoa"
-          required
-        />
-        <input
-          type="text"
-          value={sexo}
-          onChange={(e) => setSexo(e.target.value)}
-          placeholder="Sexo"
-          maxLength="10"
-          required
-        />
-        <button type="submit">{editId ? 'Atualizar' : 'Adicionar'}</button>
-        {editId && <button type="button" onClick={resetForm} className="cancel-button">Cancelar</button>}
+        <div className="form-grid">
+          <input
+            type="number"
+            value={idade}
+            onChange={(e) => setIdade(e.target.value)}
+            placeholder="Idade da pessoa"
+            required
+          />
+          <input
+            type="text"
+            value={sexo}
+            onChange={(e) => setSexo(e.target.value)}
+            placeholder="Sexo"
+            maxLength="10"
+            required
+          />
+          <button type="submit">{editId ? 'Atualizar' : 'Adicionar'}</button>
+          {editId && <button type="button" onClick={resetForm} className="cancel-button">Cancelar</button>}
+        </div>
       </form>
 
       <h3>Lista de Pessoas</h3>
