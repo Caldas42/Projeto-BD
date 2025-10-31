@@ -66,4 +66,30 @@ public class ConsultaDAO {
         String sql = "SELECT * FROM vw_resumo_financeiro_jogador";
         return executarConsulta(sql);
     }
+
+    public List<Map<String, Object>> getAntiJoin() throws SQLException {
+        String sql = "SELECT p.Cod, p.Idade, p.Sexo FROM Pessoa p LEFT JOIN Defesas_de_Torres_Jogados d ON p.Cod = d.Cod_Pessoa WHERE d.Cod_Pessoa IS NULL;";
+        return executarConsulta(sql);
+    }
+
+    public List<Map<String, Object>> getFullOuterJoin() throws SQLException {
+        String sql = "SELECT f.Numero_da_Fase, i.Nome AS Nome_Inimigo " +
+                        "FROM Fase f " +
+                        "LEFT JOIN Possui p ON f.Numero_da_Fase = p.Numero_da_Fase " +
+                        "LEFT JOIN Inimigo i ON p.Nome_Inimigo = i.Nome " +
+                        "UNION " +
+                        "SELECT f.Numero_da_Fase, i.Nome AS Nome_Inimigo " +
+                        "FROM Inimigo i " +
+                        "LEFT JOIN Possui p ON i.Nome = p.Nome_Inimigo " +
+                        "LEFT JOIN Fase f ON p.Numero_da_Fase = f.Numero_da_Fase " +
+                        "ORDER BY Numero_da_Fase;";
+        return executarConsulta(sql);
+    }
+
+    public List<Map<String, Object>> getSubconsultaUm() throws SQLException {
+        String sql = "SELECT Pessoa_Cod, Numero_da_Fase, Moedas_Restantes " +
+                        "FROM Jogador_Joga " +
+                        "WHERE Moedas_Restantes > (SELECT AVG(Moedas_Restantes) FROM Jogador_Joga);";
+        return executarConsulta(sql);
+    }
 }

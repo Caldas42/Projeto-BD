@@ -46,4 +46,19 @@ public class ConsultaController {
     public List<Map<String, Object>> getResumoFinanceiroJogador() throws SQLException {
         return consultaDAO.getResumoFinanceiroJogador();
     }
+
+    @GetMapping("/anti-join")
+    public List<Map<String, Object>> getAntiJoin() throws SQLException {
+        return consultaDAO.getAntiJoin();
+    }
+
+    @GetMapping("/full-outer-join")
+    public List<Map<String, Object>> getFullOuterJoin() throws SQLException {
+        return consultaDAO.getFullOuterJoin();
+    }
+
+    @GetMapping("/subconsulta-um")
+    public List<Map<String, Object>> getSubconsultaUm() throws SQLException {
+        return consultaDAO.getSubconsultaUm();
+    }
 }

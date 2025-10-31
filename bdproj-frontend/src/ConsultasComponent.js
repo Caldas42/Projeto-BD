@@ -47,6 +47,9 @@ function ConsultasComponent() {
         <button onClick={() => executarConsulta('proxima-fase', 'Sequência de Fases')}>Consulta 4</button>
         <button onClick={() => executarConsulta('inimigos-fase', 'Inimigos na fase')}>View 1</button>
         <button onClick={() => executarConsulta('resumo-financeiro-jogador', 'Resumo financeiro do jogador')}>View 2</button>
+        <button onClick={() => executarConsulta('anti-join', 'Pessoa sem jogo jogado')}>AntiJoin</button>
+        <button onClick={() => executarConsulta('full-outer-join', 'FaseInimigo')}>FullOuterJoin</button>
+        <button onClick={() => executarConsulta('subconsulta-um', 'MoedasRestantes Acima da média')}>Subconsulta 1</button>
       </div>
 
       {titulo && <h3>{titulo}</h3>}
