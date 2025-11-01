@@ -58,12 +58,12 @@ public class ConsultaDAO {
     }
 
     public List<Map<String, Object>> getInimigoFase() throws SQLException {
-        String sql = "SELECT * FROM vw_fase_inimigos_participacao";
+        String sql = "SELECT * FROM vw_fase_inimigos_participacao;";
         return executarConsulta(sql);
     }
 
     public List<Map<String, Object>> getResumoFinanceiroJogador() throws SQLException {
-        String sql = "SELECT * FROM vw_resumo_financeiro_jogador";
+        String sql = "SELECT * FROM vw_resumo_financeiro_jogador;";
         return executarConsulta(sql);
     }
 
@@ -90,6 +90,11 @@ public class ConsultaDAO {
         String sql = "SELECT Pessoa_Cod, Numero_da_Fase, Moedas_Restantes " +
                         "FROM Jogador_Joga " +
                         "WHERE Moedas_Restantes > (SELECT AVG(Moedas_Restantes) FROM Jogador_Joga);";
+        return executarConsulta(sql);
+    }
+
+    public List<Map<String, Object>> getSubconsultaDois() throws SQLException {
+        String sql = "SELECT Pessoa_Cod, Numero_da_Fase, Tempo_de_Jogo FROM Jogador_Joga WHERE Tempo_de_Jogo > (SELECT AVG(Tempo_de_Jogo) FROM Jogador_Joga USE INDEX (idx_Tempo_de_Jogo));";
         return executarConsulta(sql);
     }
 }
