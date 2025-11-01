@@ -133,7 +133,7 @@ function FaseComponent() {
               <td>{f.rodadas}</td>
               <td>{f.moedas_iniciais}</td>
               <td>{f.numero_da_Fase_Liberada}</td>
-              <td className="actions">
+              <td className="actions-cell">
                 <button onClick={() => handleEdit(f)}>Alterar</button>
                 <button className="cancel-button" onClick={() => handleDelete(f.numero_da_fase)}>Deletar</button>
               </td>
