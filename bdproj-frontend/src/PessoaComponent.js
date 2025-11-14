@@ -93,6 +93,31 @@ function PessoaComponent() {
     setSexo('');
   };
 
+  const handleUpdateSexo = async (cod) => {
+    const novoSexo = prompt("Digite o novo sexo:");
+    if (!novoSexo) return;
+
+    try {
+      const response = await fetch(`${API_URL}/${cod}/sexo`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ novoSexo })
+      });
+
+      if (response.ok) {
+        alert(`Sexo atualizado para ${novoSexo}`);
+        fetchPessoas();
+      } else {
+        const errText = await response.text();
+        console.error("Erro ao atualizar sexo:", errText);
+        setError("Não foi possível atualizar o sexo.");
+      }
+    } catch (error) {
+      console.error("Erro ao chamar procedure:", error);
+      setError("Erro ao atualizar sexo.");
+    }
+  };
+
   return (
     <div className="component-container">
       <h2>Gerenciamento das Pessoas</h2>
@@ -138,6 +163,7 @@ function PessoaComponent() {
               <td className="actions-cell">
                 <button onClick={() => handleEdit(pessoa)}>Alterar</button>
                 <button onClick={() => handleDelete(pessoa.cod)} className="delete-button">Deletar</button>
+                <button onClick={() => handleUpdateSexo(pessoa.cod)}>Atualizar Sexo</button>
               </td>
             </tr>
           ))}
@@ -148,4 +174,3 @@ function PessoaComponent() {
 }
 
 export default PessoaComponent;
-

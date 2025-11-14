@@ -51,6 +51,8 @@ function ConsultasComponent() {
         <button onClick={() => executarConsulta('full-outer-join', 'FaseInimigo')}>FullOuterJoin</button>
         <button onClick={() => executarConsulta('subconsulta-um', 'MoedasRestantes Acima da média')}>Subconsulta 1</button>
         <button onClick={() => executarConsulta('subconsulta-dois', 'Tempo de Jogo Acima da média')}>Subconsulta 2</button>
+        <button onClick={() => executarConsulta('funçao-1', 'classificaçao de inimigos')}>funçao 1</button>
+
       </div>
 
       {titulo && <h3>{titulo}</h3>}
