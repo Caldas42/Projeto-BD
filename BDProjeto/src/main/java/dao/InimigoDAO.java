@@ -28,7 +28,7 @@ public class InimigoDAO {
 
     public List<Inimigo> listar() throws SQLException {
         List<Inimigo> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Inimigo";
+        String sql = "SELECT * FROM Inimigo ORDER BY Almanaque_Cod";
         
         try (Connection conn = ConnectionFactory.getConnection();
              Statement st = conn.createStatement();
