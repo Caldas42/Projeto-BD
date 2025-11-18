@@ -4,8 +4,7 @@ import model.Pessoa;
 import util.ConnectionFactory;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class PessoaDAO {
 
@@ -70,19 +69,14 @@ public class PessoaDAO {
             String sqlPessoa = "DELETE FROM Pessoa WHERE Cod = ?";
             try (PreparedStatement ps = conn.prepareStatement(sqlPessoa)) {
                 ps.setInt(1, cod);
-                int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 0) {
-                    throw new SQLException("Falha ao deletar a pessoa, registro não encontrado.");
-                }
+                ps.executeUpdate();
             }
-            
+
             conn.commit();
 
         } catch (SQLException e) {
-            if (conn != null) {
-                conn.rollback();
-            }
-            throw e; 
+            if (conn != null) conn.rollback();
+            throw e;
         } finally {
             if (conn != null) {
                 conn.setAutoCommit(true);
@@ -105,18 +99,14 @@ public class PessoaDAO {
                 cs.setString(2, novoSexo);
 
                 try (ResultSet rs = cs.executeQuery()) {
-                    if (rs.next()) {
-                        mensagem = rs.getString(1);
-                    }
+                    if (rs.next()) mensagem = rs.getString(1);
                 }
             }
-            
+
             conn.commit();
 
         } catch (SQLException e) {
-            if (conn != null) {
-                conn.rollback();
-            }
+            if (conn != null) conn.rollback();
             throw e;
         } finally {
             if (conn != null) {
@@ -125,5 +115,33 @@ public class PessoaDAO {
             }
         }
         return mensagem;
+    }
+
+    public Map<String, Object> getEstatisticas() throws SQLException {
+        Map<String, Object> stats = new HashMap<>();
+
+        String sqlCount = "SELECT COUNT(*) AS total FROM Pessoa";
+        String sqlAvgAge = "SELECT ROUND(AVG(idade)) AS media_idade FROM Pessoa";
+        String sqlModeGender = "SELECT Sexo AS sexo_mais_comum FROM Pessoa GROUP BY Sexo ORDER BY COUNT(*) DESC LIMIT 1";
+
+        try (Connection conn = ConnectionFactory.getConnection()) {
+
+            try (Statement st = conn.createStatement();
+                 ResultSet rs = st.executeQuery(sqlCount)) {
+                if (rs.next()) stats.put("total", rs.getInt("total"));
+            }
+
+            try (Statement st = conn.createStatement();
+                 ResultSet rs = st.executeQuery(sqlAvgAge)) {
+                if (rs.next()) stats.put("media_idade", rs.getInt("media_idade"));
+            }
+
+            try (Statement st = conn.createStatement();
+                 ResultSet rs = st.executeQuery(sqlModeGender)) {
+                if (rs.next()) stats.put("sexo_mais_comum", rs.getString("sexo_mais_comum"));
+            }
+        }
+
+        return stats;
     }
 }

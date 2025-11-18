@@ -8,89 +8,87 @@ function DefesaDeTorresComponent() {
   const [cod_Pessoa, setCodPessoa] = useState('');
   const [editItem, setEditItem] = useState(null);
   const [error, setError] = useState(null);
+  const [totalDefesas, setTotalDefesas] = useState(0);
+  const [filtroJogo, setFiltroJogo] = useState('');
 
-  // Buscar registros da API
   const fetchDefesas = async () => {
     try {
       const response = await fetch(API_URL);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
       const data = await response.json();
       setDefesas(data);
       setError(null);
-    } catch (e) {
-      console.error("Erro ao buscar defesas:", e);
+    } catch {
       setError("Não foi possível carregar os dados.");
     }
   };
 
+  const fetchEstatisticas = async () => {
+    try {
+      const countRes = await fetch(`${API_URL}/count`);
+      const total = await countRes.json();
+      setTotalDefesas(total);
+    } catch {}
+  };
+
   useEffect(() => {
     fetchDefesas();
+    fetchEstatisticas();
   }, []);
 
-  // Enviar formulário (criar ou atualizar)
   const handleSubmit = async (event) => {
-  event.preventDefault();
-  if (!jogo || !cod_Pessoa) return;
+    event.preventDefault();
+    if (!jogo || !cod_Pessoa) return;
 
-  const defesa = { jogo, cod_Pessoa: parseInt(cod_Pessoa, 10) };
-  const method = editItem ? 'PUT' : 'POST';
+    const defesa = { jogo, cod_Pessoa: parseInt(cod_Pessoa) };
+    const method = editItem ? 'PUT' : 'POST';
 
-  try {
-    const response = await fetch(API_URL, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(defesa),
-    });
+    try {
+      const response = await fetch(API_URL, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(defesa),
+      });
 
-    if (response.ok) {
-      await fetchDefesas();
-      resetForm();
-    } else {
-      const errText = await response.text();
-      console.error("Erro do servidor:", errText);
-      setError("Falha ao salvar.");
+      if (response.ok) {
+        fetchDefesas();
+        fetchEstatisticas();
+        resetForm();
+      } else {
+        setError("Falha ao salvar.");
+      }
+    } catch {
+      setError("Erro de conexão com o servidor.");
     }
-  } catch (error) {
-    console.error("Erro ao salvar:", error);
-    setError("Erro de conexão com o servidor.");
-  }
-};
+  };
 
-
-  // Edição
   const handleEdit = (defesa) => {
     setEditItem(defesa);
     setJogo(defesa.jogo);
     setCodPessoa(defesa.cod_Pessoa);
   };
 
-  // Exclusão
   const handleDelete = async (jogo, cod_Pessoa) => {
-  try {
-    const response = await fetch(`${API_URL}/${encodeURIComponent(jogo)}/${cod_Pessoa}`, {
-      method: 'DELETE',
-    });
-    if (response.ok) {
-      await fetchDefesas();
-    } else {
-      const errText = await response.text();
-      console.error("Erro ao deletar:", errText);
-      setError("Falha ao deletar.");
+    try {
+      await fetch(`${API_URL}/${encodeURIComponent(jogo)}/${cod_Pessoa}`, {
+        method: 'DELETE',
+      });
+      fetchDefesas();
+      fetchEstatisticas();
+    } catch {
+      setError("Erro ao deletar.");
     }
-  } catch (error) {
-    console.error("Erro ao deletar:", error);
-    setError("Erro de conexão com o servidor.");
-  }
-};
-
+  };
 
   const resetForm = () => {
     setEditItem(null);
     setJogo('');
     setCodPessoa('');
   };
+
+  const defesasFiltradas = defesas.filter((defesa) => {
+    if (filtroJogo === '') return true;
+    return defesa.jogo.toLowerCase().includes(filtroJogo.toLowerCase());
+  });
 
   return (
     <div className="component-container">
@@ -116,39 +114,62 @@ function DefesaDeTorresComponent() {
           />
           <button type="submit">{editItem ? 'Atualizar' : 'Adicionar'}</button>
           {editItem && (
-            <button
-              type="button"
-              onClick={resetForm}
-              className="cancel-button"
-            >
+            <button type="button" onClick={resetForm} className="cancel-button">
               Cancelar
             </button>
           )}
         </div>
       </form>
 
-      <h3>Lista de Defesas de Torres Jogadas</h3>
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>Jogo</th>
-            <th>Código da Pessoa</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {defesas.map((defesa) => (
-            <tr key={`${defesa.jogo}-${defesa.cod_Pessoa}`}>
-              <td>{defesa.jogo}</td>
-              <td>{defesa.cod_Pessoa}</td>
-              <td className="actions-cell">
-                <button onClick={() => handleEdit(defesa)}>Alterar</button>
-                <button onClick={() => handleDelete(defesa.jogo, defesa.cod_Pessoa)} className="delete-button">Deletar</button>
-              </td>
+      <div className="stats-container">
+        <div className="stat-item">
+            <h4>Total de Registros</h4>
+            <p>{totalDefesas}</p>
+        </div>
+      </div>
+
+      <div className="list-header">
+        <h3>Lista de Defesas de Torres Jogadas</h3>
+        <div className="filter-container">
+            <label>Filtrar por Jogo:</label>
+            <input 
+                type="text" 
+                value={filtroJogo} 
+                onChange={(e) => setFiltroJogo(e.target.value)}
+                placeholder="Diga o nome do jogo"
+                style={{ padding: '8px' }}
+            />
+        </div>
+      </div>
+
+      <div className="tabela-container">
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Jogo</th>
+              <th>Código da Pessoa</th>
+              <th>Ações</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {defesasFiltradas.map((defesa) => (
+              <tr key={`${defesa.jogo}-${defesa.cod_Pessoa}`}>
+                <td>{defesa.jogo}</td>
+                <td>{defesa.cod_Pessoa}</td>
+                <td className="actions-cell">
+                  <button onClick={() => handleEdit(defesa)}>Alterar</button>
+                  <button
+                    onClick={() => handleDelete(defesa.jogo, defesa.cod_Pessoa)}
+                    className="delete-button"
+                  >
+                    Deletar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

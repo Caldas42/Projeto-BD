@@ -33,4 +33,10 @@ public class FaseController {
     public void excluirFase(@PathVariable int id) throws SQLException {
         faseDAO.excluir(id);
     }
+
+    @GetMapping("/total")
+    public int getTotalFases() throws SQLException {
+        return faseDAO.contar();
+    }
+
 }

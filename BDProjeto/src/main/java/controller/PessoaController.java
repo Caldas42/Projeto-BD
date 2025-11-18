@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+
 @RestController
-@CrossOrigin 
+@CrossOrigin
 @RequestMapping("/api/pessoas")
 public class PessoaController {
 
@@ -35,12 +36,14 @@ public class PessoaController {
         pessoaDAO.excluir(cod);
     }
 
+    @GetMapping("/stats")
+    public Map<String, Object> getEstatisticas() throws SQLException {
+        return pessoaDAO.getEstatisticas();
+    }
+
     @PatchMapping("/{cod}/sexo")
     public String atualizarSexoPessoa(@PathVariable int cod, @RequestBody Map<String, String> body) throws SQLException {
         String novoSexo = body.get("sexo");
-        if (novoSexo == null) {
-            throw new IllegalArgumentException("Corpo da requisição deve conter a chave 'sexo'.");
-        }
         return pessoaDAO.atualizarSexo(cod, novoSexo);
     }
 }

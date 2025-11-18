@@ -123,5 +123,35 @@ public class InimigoDAO {
 
         return null;
     }
+
+    public int contar() throws SQLException {
+    String sql = "SELECT COUNT(*) FROM Inimigo";
+    try (Connection conn = ConnectionFactory.getConnection();
+         Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery(sql)) {
+        if (rs.next()) return rs.getInt(1);
+    }
+    return 0;
+}
+
+    public int mediaVida() throws SQLException {
+    String sql = "SELECT ROUND(AVG(Vida)) FROM Inimigo";
+    try (Connection conn = ConnectionFactory.getConnection();
+        Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery(sql)) {
+        if (rs.next()) return rs.getInt(1);
+    }
+    return 0;
+}
+
+    public double mediaVelocidade() throws SQLException {
+    String sql = "SELECT ROUND(AVG(Velocidade)) FROM Inimigo";
+    try (Connection conn = ConnectionFactory.getConnection();
+         Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery(sql)) {
+        if (rs.next()) return rs.getDouble(1);
+    }
+    return 0;
+}
 }
 

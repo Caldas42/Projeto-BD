@@ -49,4 +49,19 @@ public class InimigoController {
         return Map.of("classificacao", classificacao);
     }
 
+    @GetMapping("/count")
+    public int count() throws SQLException {
+        return inimigoDAO.contar();
+}
+
+    @GetMapping("/media-vida")
+    public int mediaVida() throws SQLException {
+        return inimigoDAO.mediaVida();
+}
+
+    @GetMapping("/media-velocidade")
+    public double mediaVelocidade() throws SQLException {
+        return inimigoDAO.mediaVelocidade();
+}
+
 }

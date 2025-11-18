@@ -64,6 +64,6 @@ public class ConsultaController {
 
     @GetMapping("/subconsulta-dois")
     public List<Map<String, Object>> getSubconsultaDois() throws SQLException {
-        return consultaDAO.getSubconsultaUm();
+        return consultaDAO.getSubconsultaDois();
     }
 }

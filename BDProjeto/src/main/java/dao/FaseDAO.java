@@ -109,4 +109,17 @@ public class FaseDAO {
             }
         }
     }
+
+    public int contar() throws SQLException {
+    String sql = "SELECT COUNT(*) AS total FROM Fase";
+    try (Connection conn = ConnectionFactory.getConnection();
+         Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery(sql)) {
+
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+    }
+    return 0;
+}
 }

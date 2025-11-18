@@ -4,6 +4,7 @@ const API_URL = 'http://localhost:8080/api/fases';
 
 function FaseComponent() {
   const [fases, setFases] = useState([]);
+  const [totalFases, setTotalFases] = useState(0);
   const [formData, setFormData] = useState({
     numero_da_fase: '',
     vidas_iniciais: '',
@@ -16,20 +17,28 @@ function FaseComponent() {
 
   useEffect(() => {
     fetchFases();
+    fetchTotal();
   }, []);
 
   const fetchFases = async () => {
     try {
       setError('');
       const response = await fetch(API_URL);
-      if (!response.ok) throw new Error('Falha ao carregar fases.');
       const data = await response.json();
       setFases(data);
     } catch (err) {
       setError(err.message);
     }
   };
-  
+
+  const fetchTotal = async () => {
+    try {
+      const response = await fetch(`${API_URL}/total`);
+      const data = await response.json();
+      setTotalFases(data);
+    } catch (err) {}
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -39,16 +48,16 @@ function FaseComponent() {
     e.preventDefault();
     const method = editId ? 'PUT' : 'POST';
     const url = editId ? `${API_URL}/${editId}` : API_URL;
-    
+
     const faseData = {
-      numero_da_fase: parseInt(formData.numero_da_fase, 10),
-      vidas_iniciais: parseInt(formData.vidas_iniciais, 10),
-      rodadas: parseInt(formData.rodadas, 10),
-      moedas_iniciais: parseInt(formData.moedas_iniciais, 10),
-      numero_da_Fase_Liberada: formData.numero_da_Fase_Liberada 
-        ? parseInt(formData.numero_da_Fase_Liberada, 10) 
-        : null
-    };
+      numero_da_fase: parseInt(formData.numero_da_fase, 10),
+      vidas_iniciais: parseInt(formData.vidas_iniciais, 10),
+      rodadas: parseInt(formData.rodadas, 10),
+      moedas_iniciais: parseInt(formData.moedas_iniciais, 10),
+      numero_da_Fase_Liberada: formData.numero_da_Fase_Liberada
+        ? parseInt(formData.numero_da_Fase_Liberada, 10)
+        : null
+    };
 
     try {
       setError('');
@@ -57,9 +66,9 @@ function FaseComponent() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(faseData),
       });
-      if (!response.ok) throw new Error(`Falha ao ${editId ? 'atualizar' : 'salvar'} fase.`);
       resetForm();
       fetchFases();
+      fetchTotal();
     } catch (err) {
       setError(err.message);
     }
@@ -68,20 +77,20 @@ function FaseComponent() {
   const handleEdit = (fase) => {
     setEditId(fase.numero_da_fase);
     setFormData({
-        numero_da_fase: fase.numero_da_fase,
-        vidas_iniciais: fase.vidas_iniciais,
-        rodadas: fase.rodadas,
-        moedas_iniciais: fase.moedas_iniciais,
-        numero_da_Fase_Liberada: fase.numero_da_Fase_Liberada
+      numero_da_fase: fase.numero_da_fase,
+      vidas_iniciais: fase.vidas_iniciais,
+      rodadas: fase.rodadas,
+      moedas_iniciais: fase.moedas_iniciais,
+      numero_da_Fase_Liberada: fase.numero_da_Fase_Liberada
     });
   };
 
   const handleDelete = async (id) => {
     try {
       setError('');
-      const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-      if (!response.ok) throw new Error('Falha ao deletar fase.');
+      await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
       fetchFases();
+      fetchTotal();
     } catch (err) {
       setError(err.message);
     }
@@ -98,18 +107,20 @@ function FaseComponent() {
   return (
     <div className="component-container">
       <h2>Gerenciamento de Fases</h2>
-      {error && <div className="error-message">{error}</div>}
-      <form onSubmit={handleSubmit}className="form-container">
+
+      <h3>Total de Fases: {totalFases}</h3>
+
+      <form onSubmit={handleSubmit} className="form-container">
         <div className="form-grid">
-            <input type="number" name="numero_da_fase" value={formData.numero_da_fase} onChange={handleInputChange} placeholder="Nº da Fase" required disabled={!!editId} />
-            <input type="number" name="vidas_iniciais" value={formData.vidas_iniciais} onChange={handleInputChange} placeholder="Vidas Iniciais" required/>
-            <input type="number" name="rodadas" value={formData.rodadas} onChange={handleInputChange} placeholder="Rodadas" required/>
-            <input type="number" name="moedas_iniciais" value={formData.moedas_iniciais} onChange={handleInputChange} placeholder="Moedas Iniciais" required/>
-            <input type="number" name="numero_da_Fase_Liberada" value={formData.numero_da_Fase_Liberada} onChange={handleInputChange} placeholder="Fase Liberada" required/>
+          <input type="number" name="numero_da_fase" value={formData.numero_da_fase} onChange={handleInputChange} placeholder="Nº da Fase" required disabled={!!editId} />
+          <input type="number" name="vidas_iniciais" value={formData.vidas_iniciais} onChange={handleInputChange} placeholder="Vidas Iniciais" required />
+          <input type="number" name="rodadas" value={formData.rodadas} onChange={handleInputChange} placeholder="Rodadas" required />
+          <input type="number" name="moedas_iniciais" value={formData.moedas_iniciais} onChange={handleInputChange} placeholder="Moedas Iniciais" required />
+          <input type="number" name="numero_da_Fase_Liberada" value={formData.numero_da_Fase_Liberada} onChange={handleInputChange} placeholder="Fase Liberada" required />
         </div>
         <div className="form-group">
-            <button type="submit">{editId ? 'Atualizar' : 'Adicionar'}</button>
-            {editId && <button type="button" onClick={resetForm}>Cancelar</button>}
+          <button type="submit">{editId ? 'Atualizar' : 'Adicionar'}</button>
+          {editId && <button type="button" onClick={resetForm}>Cancelar</button>}
         </div>
       </form>
 
@@ -133,7 +144,7 @@ function FaseComponent() {
               <td>{f.rodadas}</td>
               <td>{f.moedas_iniciais}</td>
               <td>{f.numero_da_Fase_Liberada}</td>
-              <td className="actions-cell">
+              <td>
                 <button onClick={() => handleEdit(f)}>Alterar</button>
                 <button className="cancel-button" onClick={() => handleDelete(f.numero_da_fase)}>Deletar</button>
               </td>

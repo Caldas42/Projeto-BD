@@ -5,6 +5,9 @@ import ConsultasComponent from './ConsultasComponent';
 import DefesaDeTorresComponent from './DefesaDeTorresComponent';
 import InimigoComponent from './InimigoComponent';
 import ClassificarInimigoComponent from './ClassificarInimigoComponent';
+import PessoasGraficos from './PessoasGraficos';
+import JogadosGraficos from './JogadosGraficos';
+import InimigosGraficos from './InimigosGraficos';
 import './App.css';
 
 function App() {
@@ -20,7 +23,10 @@ function App() {
         <InimigoComponent/>
         <ConsultasComponent />
         <ClassificarInimigoComponent/>
-      </main>
+        <PessoasGraficos />
+        <JogadosGraficos />
+        <InimigosGraficos />
+      </main> 
     </div>
   );
 }

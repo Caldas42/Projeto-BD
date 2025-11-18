@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Defesas_de_Torres_JogadosDAO {
+
     public void inserir(Defesas_de_Torres_Jogados td) throws SQLException {
         String sql = "INSERT INTO Defesas_de_Torres_Jogados (Jogo, Cod_Pessoa) VALUES (?, ?)";
         try (Connection conn = ConnectionFactory.getConnection();
@@ -26,8 +27,8 @@ public class Defesas_de_Torres_JogadosDAO {
              ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 lista.add(new Defesas_de_Torres_Jogados(
-                    rs.getString("Jogo"),
-                    rs.getInt("Cod_Pessoa")
+                        rs.getString("Jogo"),
+                        rs.getInt("Cod_Pessoa")
                 ));
             }
         }
@@ -45,12 +46,23 @@ public class Defesas_de_Torres_JogadosDAO {
     }
 
     public void excluir(String jogo, int codPessoa) throws SQLException {
-    String sql = "DELETE FROM Defesas_de_Torres_Jogados WHERE Jogo=? AND Cod_Pessoa=?";
-    try (Connection conn = ConnectionFactory.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setString(1, jogo);
-        ps.setInt(2, codPessoa);
-        ps.executeUpdate();
+        String sql = "DELETE FROM Defesas_de_Torres_Jogados WHERE Jogo=? AND Cod_Pessoa=?";
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, jogo);
+            ps.setInt(2, codPessoa);
+            ps.executeUpdate();
+        }
     }
-}
+
+    public int contar() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Defesas_de_Torres_Jogados";
+        try (Connection conn = ConnectionFactory.getConnection();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) return rs.getInt(1);
+        }
+        return 0;
+    }
+
 }

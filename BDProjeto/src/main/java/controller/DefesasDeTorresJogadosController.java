@@ -32,6 +32,11 @@ public class DefesasDeTorresJogadosController {
     @DeleteMapping("/{jogo}/{cod_Pessoa}")
     public void excluir(@PathVariable String jogo, @PathVariable int cod_Pessoa) throws SQLException {
         dtjDAO.excluir(jogo, cod_Pessoa);
-    }   
+    }
+
+    @GetMapping("/count")
+    public int count() throws SQLException {
+        return dtjDAO.contar();
+    }
 
 }
