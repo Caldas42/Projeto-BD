@@ -7,6 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class InimigoDAO {
 
     public void inserir(Inimigo inimigo) throws SQLException {
@@ -63,7 +66,6 @@ public class InimigoDAO {
             ps.executeUpdate();
         }
     }
-
     public void excluir(String nome) throws SQLException {
         Connection conn = null;
         try {
@@ -99,4 +101,27 @@ public class InimigoDAO {
             }
         }
     }
+
+    public String classificarInimigo(int vida, double velocidade) {
+        String sql = "SELECT fn_classificar_inimigo(?, ?) AS classificacao";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, vida);
+            stmt.setDouble(2, velocidade);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("classificacao");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }
+

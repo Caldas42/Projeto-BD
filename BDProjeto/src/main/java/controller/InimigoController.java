@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin 
@@ -34,4 +35,18 @@ public class InimigoController {
     public void excluirInimigo(@PathVariable String nome) throws SQLException {
         inimigoDAO.excluir(nome);
     }
+
+    @PostMapping("/classificar-inimigo")
+    @CrossOrigin("*")
+    public Map<String, String> classificar(@RequestBody Map<String, Object> dados) {
+
+        int vida = (int) dados.get("vida");
+        double velocidade = Double.parseDouble(dados.get("velocidade").toString());
+
+        InimigoDAO dao = new InimigoDAO();
+        String classificacao = dao.classificarInimigo(vida, velocidade);
+
+        return Map.of("classificacao", classificacao);
+    }
+
 }

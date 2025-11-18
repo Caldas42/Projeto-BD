@@ -90,4 +90,40 @@ public class PessoaDAO {
             }
         }
     }
+
+    public String atualizarSexo(int cod, String novoSexo) throws SQLException {
+        String sql = "{CALL AtualizarSexoPessoa(?, ?)}";
+        String mensagem = "Ocorreu um erro.";
+        Connection conn = null;
+
+        try {
+            conn = ConnectionFactory.getConnection();
+            conn.setAutoCommit(false);
+
+            try (CallableStatement cs = conn.prepareCall(sql)) {
+                cs.setInt(1, cod);
+                cs.setString(2, novoSexo);
+
+                try (ResultSet rs = cs.executeQuery()) {
+                    if (rs.next()) {
+                        mensagem = rs.getString(1);
+                    }
+                }
+            }
+            
+            conn.commit();
+
+        } catch (SQLException e) {
+            if (conn != null) {
+                conn.rollback();
+            }
+            throw e;
+        } finally {
+            if (conn != null) {
+                conn.setAutoCommit(true);
+                conn.close();
+            }
+        }
+        return mensagem;
+    }
 }
