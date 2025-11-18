@@ -1,3 +1,47 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\com\example\demo\BdProjetoApplication.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\controller\ConsultaController.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\controller\DefesasDeTorresJogadosController.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\controller\FaseController.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\controller\FuncaoController.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\controller\InimigoController.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\controller\PessoaController.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\dao\ConsultaDAO.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\dao\Defesas_de_Torres_JogadosDAO.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\dao\FaseDAO.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\dao\FuncaoDAO.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\dao\InimigoDAO.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\dao\PessoaDAO.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\model\Defesas_de_Torres_Jogados.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\model\Fase.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\model\Inimigo.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\model\Pessoa.java
+C:\Users\Samsung\Desktop\Bd_projetp\Projeto-BD\BDProjeto\src\main\java\util\ConnectionFactory.java
+=======
+<<<<<<< HEAD
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\com\example\demo\BdProjetoApplication.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\controller\ClassificarInimigoController.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\controller\ConsultaController.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\controller\DefesasDeTorresJogadosController.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\controller\FaseController.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\controller\FuncaoController.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\controller\InimigoController.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\controller\PessoaController.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\dao\ConsultaDAO.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\dao\Defesas_de_Torres_JogadosDAO.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\dao\FaseDAO.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\dao\FuncaoDAO.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\dao\InimigoDAO.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\dao\PessoaDAO.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\model\Defesas_de_Torres_Jogados.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\model\Fase.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\model\Inimigo.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\model\Pessoa.java
+C:\Users\celio\Projeto-BD\BDProjeto\src\main\java\util\ConnectionFactory.java
+=======
+>>>>>>> d7ee5258f99097cb81474e580b75f365cad66ac4
 C:\Users\Joao Vitor\Projeto-BD\BDProjeto\src\main\java\com\example\demo\BdProjetoApplication.java
 C:\Users\Joao Vitor\Projeto-BD\BDProjeto\src\main\java\controller\ClassificarInimigoController.java
 C:\Users\Joao Vitor\Projeto-BD\BDProjeto\src\main\java\controller\ConsultaController.java
@@ -17,3 +61,8 @@ C:\Users\Joao Vitor\Projeto-BD\BDProjeto\src\main\java\model\Fase.java
 C:\Users\Joao Vitor\Projeto-BD\BDProjeto\src\main\java\model\Inimigo.java
 C:\Users\Joao Vitor\Projeto-BD\BDProjeto\src\main\java\model\Pessoa.java
 C:\Users\Joao Vitor\Projeto-BD\BDProjeto\src\main\java\util\ConnectionFactory.java
+<<<<<<< HEAD
+=======
+>>>>>>> 9bc8a4c200f076b8f06e454e04d936b086ad2418
+>>>>>>> 9e1d96f43ac61f87923f573582ff7ce200de0d5c
+>>>>>>> d7ee5258f99097cb81474e580b75f365cad66ac4

@@ -12,6 +12,7 @@ function InimigosComponent() {
   const [editItem, setEditItem] = useState(null);
   const [error, setError] = useState(null);
 
+<<<<<<< HEAD
   const [total, setTotal] = useState(0);
   const [vidaMedia, setVidaMedia] = useState(0);
   const [velMedia, setVelMedia] = useState(0);
@@ -19,6 +20,8 @@ function InimigosComponent() {
   // Estado para o filtro
   const [filtroFase, setFiltroFase] = useState('');
 
+=======
+>>>>>>> d7ee5258f99097cb81474e580b75f365cad66ac4
   const fetchInimigos = async () => {
     try {
       const response = await fetch(API_URL);
