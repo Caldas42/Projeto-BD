@@ -111,20 +111,20 @@ const PessoasGraficos = () => {
         label: "Quantidade por Idade",
         data: idadeValores,
         backgroundColor: [
-          "#FF6384B3",
-          "#36A2EBB3",
-          "#FFCE56B3",
-          "#4BC0C0B3",
-          "#9966FFB3",
-          "#FF9F40B3"
+          "rgba(255, 99, 132)",
+          "rgba(54, 162, 235)",
+          "rgba(255, 206, 86)",
+          "rgba(75, 192, 192)",
+          "rgba(153, 102, 255)",
+          "rgba(255, 159, 64)"
         ],
         borderColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56",
-          "#4BC0C0",
-          "#9966FF",
-          "#FF9F40"
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF"
         ],
         borderWidth: 1
       }
