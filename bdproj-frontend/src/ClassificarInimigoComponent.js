@@ -37,7 +37,7 @@ function ClassificarInimigoComponent() {
   };
 
   return (
-    <div className="component-container">
+    <div className="component-container"> 
       <h2>Classificar Inimigo</h2>
 
       {error && <div className="error-message">{error}</div>}
