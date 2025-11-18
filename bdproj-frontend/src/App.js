@@ -4,8 +4,6 @@ import FaseComponent from './FaseComponent';
 import ConsultasComponent from './ConsultasComponent';
 import DefesaDeTorresComponent from './DefesaDeTorresComponent';
 import InimigoComponent from './InimigoComponent';
-import Graficos from './graficos';
-import CalcularBonusComponent from './CalcularBonusComponent';
 import ClassificarInimigoComponent from './ClassificarInimigoComponent';
 import './App.css';
 
@@ -21,9 +19,7 @@ function App() {
         <DefesaDeTorresComponent/>
         <InimigoComponent/>
         <ConsultasComponent />
-        <CalcularBonusComponent/>
         <ClassificarInimigoComponent/>
-        <Graficos/>
       </main>
     </div>
   );
