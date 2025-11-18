@@ -12,7 +12,6 @@ function InimigosComponent() {
   const [editItem, setEditItem] = useState(null);
   const [error, setError] = useState(null);
 
-  // Buscar registros da API
   const fetchInimigos = async () => {
     try {
       const response = await fetch(API_URL);
@@ -31,11 +30,9 @@ function InimigosComponent() {
     fetchInimigos();
   }, []);
 
-  // Enviar formulário (criar ou atualizar)
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Lista de Almanaques já usados
     const usados = inimigos
       .map(i => i.almanaque_Cod ?? i.Almanaque_Cod)
       .filter(a => a != null);

@@ -6,6 +6,9 @@ import DefesaDeTorresComponent from './DefesaDeTorresComponent';
 import InimigoComponent from './InimigoComponent';
 import CalcularBonusComponent from './CalcularBonusComponent';
 import ClassificarInimigoComponent from './ClassificarInimigoComponent';
+import PessoasGraficos from "./PessoasGraficos";
+import JogadosGraficos from "./JogadosGraficos";
+
 import './App.css';
 
 function App() {
@@ -22,6 +25,8 @@ function App() {
         <ConsultasComponent />
         <CalcularBonusComponent/>
         <ClassificarInimigoComponent/>
+        <PessoasGraficos/>
+        <JogadosGraficos/>
       </main>
     </div>
   );
