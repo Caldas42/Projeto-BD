@@ -201,8 +201,4 @@ const PessoasGraficos = () => {
   );
 };
 
-<<<<<<< HEAD
 export default PessoasGraficos;
-=======
-export default PessoasGraficos;
->>>>>>> d7ee5258f99097cb81474e580b75f365cad66ac4

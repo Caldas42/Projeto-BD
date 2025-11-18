@@ -5,15 +5,9 @@ import ConsultasComponent from './ConsultasComponent';
 import DefesaDeTorresComponent from './DefesaDeTorresComponent';
 import InimigoComponent from './InimigoComponent';
 import ClassificarInimigoComponent from './ClassificarInimigoComponent';
-<<<<<<< HEAD
 import PessoasGraficos from './PessoasGraficos';
 import JogadosGraficos from './JogadosGraficos';
 import InimigosGraficos from './InimigosGraficos';
-=======
-import PessoasGraficos from "./PessoasGraficos";
-import JogadosGraficos from "./JogadosGraficos";
-
->>>>>>> d7ee5258f99097cb81474e580b75f365cad66ac4
 import './App.css';
 
 function App() {
@@ -29,19 +23,12 @@ function App() {
         <InimigoComponent/>
         <ConsultasComponent />
         <ClassificarInimigoComponent/>
-<<<<<<< HEAD
         <PessoasGraficos />
         <JogadosGraficos />
         <InimigosGraficos />
       </main> 
-=======
-        <PessoasGraficos/>
-        <JogadosGraficos/>
-      </main>
->>>>>>> d7ee5258f99097cb81474e580b75f365cad66ac4
     </div>
   );
 }
 
 export default App;
-
